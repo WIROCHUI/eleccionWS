@@ -64,6 +64,34 @@ public class PersonaController {
 		return new ResponseEntity<Persona>(per,HttpStatus.OK);
 	}
 	
+
+	@GetMapping("/buscarPersona/{dni}")
+	public ResponseEntity<?> show(@PathVariable int dni) {
+		Persona per = null;
+		Map<String, Object> response = new HashMap<>();
+
+		try {
+			per =  personaService.findByDni(dni);
+		} catch (DataAccessException e) {
+			response.put("mensaje", "Error al realizar la consulta en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		String ddni = String.valueOf(dni);	
+		
+		
+		if (per == null) {
+			response.put("mensaje", "DNI: ".concat(ddni.concat(" no exite en la base de datos")));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		} else if (per.getFlgGrabado() == 1) {
+			response.put("mensaje", "El DNI: ".concat(String.valueOf(dni).concat(" ya registro su acta de votación")));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<Persona>(per,HttpStatus.OK);
+	}
+	
 	@PostMapping("/persona")
 	public ResponseEntity<?> create(@Valid @RequestBody Persona persona, BindingResult result) {
 		Persona personaNuevo = null;

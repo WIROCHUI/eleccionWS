@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import pe.com.eleccion.entity.Distrito;
-import pe.com.eleccion.entity.Persona;
 import pe.com.eleccion.service.impl.DistritoService;
 
 /**

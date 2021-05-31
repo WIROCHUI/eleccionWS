@@ -17,5 +17,6 @@ public interface PersonaService {
 	public Persona findById(Long id);
 	public Persona savePersona(Persona persona);
 	public List<Persona> findPersona();
+	public Persona findByDni(int dni);
 	
 }
