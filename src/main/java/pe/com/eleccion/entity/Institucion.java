@@ -5,9 +5,7 @@ package pe.com.eleccion.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,8 +14,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -49,15 +45,6 @@ public class Institucion implements Serializable{
 	@Size(max=150)
 	@Column(name = "DIRECCION",nullable = false)
 	@Getter @Setter private String direccion;
-	
-//	@OneToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name = "ID_MESA")
-//	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-//	@Getter @Setter private Mesa mesa;
-	
-//	@JsonIgnoreProperties(value={"institucion", "hibernateLazyInitializer", "handler"}, allowSetters=true)
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "institucion", cascade = CascadeType.ALL)
-//	@Getter @Setter private List<Mesa> mesas;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_DISTRITO")

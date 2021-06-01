@@ -9,8 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pe.com.eleccion.dao.DistritoDao;
-import pe.com.eleccion.entity.Distrito;
-import pe.com.eleccion.entity.Institucion;
+import pe.com.eleccion.entity.Distrito;;
 
 /**
  * @author Wilder Chui

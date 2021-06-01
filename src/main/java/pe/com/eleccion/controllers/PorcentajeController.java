@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import pe.com.eleccion.dto.PorcentajeGeneralDto;
-import pe.com.eleccion.entity.Persona;
 import pe.com.eleccion.entity.Votacion;
 import pe.com.eleccion.service.impl.VotacionService;
 
@@ -35,6 +34,7 @@ public class PorcentajeController {
 	@Autowired
 	private VotacionService votacionService;
 
+	@SuppressWarnings("unused")
 	@GetMapping("/conteo/{id}")
 	public ResponseEntity<?> show(@PathVariable Long id) {
 		Votacion votacion = null;
