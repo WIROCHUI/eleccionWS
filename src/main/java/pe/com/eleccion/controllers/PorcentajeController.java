@@ -26,7 +26,7 @@ import pe.com.eleccion.service.impl.VotacionService;
  * Version 1.0
  */
 
-@CrossOrigin(origins = {"http://localhost:4200"})
+@CrossOrigin(origins = {"http://localhost:4200","https://login-ng-4d94a.web.app"})
 @RestController
 @RequestMapping("/eleccion")
 public class PorcentajeController {
