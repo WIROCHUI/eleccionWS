@@ -18,5 +18,7 @@ public interface PersonaService {
 	public Persona savePersona(Persona persona);
 	public List<Persona> findPersona();
 	public Persona findByDni(int dni);
+	public List<Persona> findPersonaByDistritoAndFlg(int idDistrito, int flg);
+	public Persona findByIdDistritoAndFlgGrabado(int idDistrito, int flgGrabado);
 	
 }

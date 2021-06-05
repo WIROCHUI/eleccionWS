@@ -118,5 +118,52 @@ public class PersonaController {
 		response.put("cliente", personaNuevo);
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
+	
+	@GetMapping("/votosTotales/{idDistrito}/{flg}")
+	public ResponseEntity<?> conteoVotos(@PathVariable int idDistrito, @PathVariable int flg) {
+		Persona per = null;
+		Map<String, Object> response = new HashMap<>();
+
+		try {
+			per =  personaService.findByIdDistritoAndFlgGrabado(idDistrito,flg);
+		} catch (DataAccessException e) {
+			response.put("mensaje", "Error al realizar la consulta en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		
+		if (per == null) {
+			response.put("mensaje", "Distrito: ".concat(idDistrito +" no exite en la base de datos"));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		} else if (per.getFlgGrabado() == 1) {
+			response.put("mensaje", "El DNI: ".concat(String.valueOf(idDistrito).concat(" ya registro su acta de votación")));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<Persona>(per,HttpStatus.OK);
+	}
+	
+	@GetMapping("/listaVotos/{idDistrito}/{flg}")
+	public ResponseEntity<?> listaPorDistritoYFlagGrabado(@PathVariable int idDistrito, @PathVariable int flg) {
+		List<Persona> per = null;
+		Map<String, Object> response = new HashMap<>();
+
+		try {
+			per =  personaService.findPersonaByDistritoAndFlg(idDistrito,flg);
+		} catch (DataAccessException e) {
+			response.put("mensaje", "Error al realizar la consulta en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		
+		if (per == null) {
+			response.put("mensaje", "Distrito: ".concat(idDistrito + " y "+ flg +" no exite en la base de datos"));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		} 
+		
+		return new ResponseEntity<List<Persona>>(per,HttpStatus.OK);
+	}
 
 }
