@@ -37,7 +37,9 @@ import lombok.Setter;
 @Table(name="PERSONA")
 @NamedQueries({
 	@NamedQuery(name = "Persona.findAllFlag", query = "SELECT e FROM Persona e where e.flgGrabado = :flgGrabado "),
+	@NamedQuery(name = "Persona.findAllFlagAndDistrito", query = "SELECT e FROM Persona e where e.flgGrabado = :flgGrabado and e.idDistrito.id = :idDistrito order by e.createDatetime desc "),
 	@NamedQuery(name = "Persona.findByDni", query = "SELECT e FROM Persona e where e.dni = :dni "),
+				
 })
 public class Persona implements Serializable{
 	
@@ -95,7 +97,7 @@ public class Persona implements Serializable{
 	@Column(name = "FLG_GRABADO",nullable = false)
 	@Getter @Setter private int flgGrabado;
 	
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "CREATE_DATETIME")
 	@Getter @Setter private Date createDatetime;
 	
@@ -125,10 +127,15 @@ public class Persona implements Serializable{
 		this.createDatetime = createDatetime;
 	}
 
-
-
-
-
+	public Persona(int peruLibre, int fuerzaPopular, int votoBlanco, int votoNulo, int votoImpugnado,
+			int totalVotoEmitido) {
+		this.peruLibre = peruLibre;
+		this.fuerzaPopular = fuerzaPopular;
+		this.votoBlanco = votoBlanco;
+		this.votoNulo = votoNulo;
+		this.votoImpugnado = votoImpugnado;
+		this.totalVotoEmitido = totalVotoEmitido;
+	}
 
 
 	/**
