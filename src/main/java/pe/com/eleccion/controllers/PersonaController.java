@@ -165,5 +165,12 @@ public class PersonaController {
 		
 		return new ResponseEntity<List<Persona>>(per,HttpStatus.OK);
 	}
+	
+	@GetMapping("/conexion")
+	public ResponseEntity<?> conexion() {
+		Map<String, Object> response = new HashMap<>();		
+			response.put("mensaje", "0");
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+	}
 
 }
